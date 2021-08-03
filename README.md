@@ -24,7 +24,7 @@ sudo docker run --rm -it \
   ejenner/karger_extensions:dependencies bash
 ```
 (the `:dependencies` tag contains the packages and the data but *not* the code).
-Then again skip to [How to run experiments](#how-to-run-experiments).
+Then again run `poetry shell` and skip to [How to run experiments](#how-to-run-experiments).
 
 If you don't want to use the Docker image, you will need to first install
 the required dependencies:
