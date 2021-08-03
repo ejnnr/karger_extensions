@@ -1,7 +1,8 @@
 # Extensions of Karger's Algorithm
 
 ## Requirements
-The easiest way to set up all required packages is to user the Docker image
+The easiest way to set up all required packages is to user the
+[Docker image](https://hub.docker.com/repository/docker/ejenner/karger_extensions)
 we provide. It contains the code, all the preprocessed datasets and all
 required packages. To quickly get started (you don't even need to clone this repo):
 ```
