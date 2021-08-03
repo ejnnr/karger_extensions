@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "karger_extensions"
+version = "0.1.0"
+description = "Code for the Extensions of Karger's algorithm paper"
+authors = ["Erik Jenner <erik.jenner99@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.10"
+numpy = "^1.21.1"
+scipy = "^1.7.1"
+scikit-learn = "^0.24.2"
+scikit-image = "^0.18.2"
+matplotlib = "^3.4.2"
+h5py = "^3.3.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
