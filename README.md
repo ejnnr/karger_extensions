@@ -106,6 +106,14 @@ The default value everywhere is `BETAS=0 1 2 5 10 20`, which is required
 to reproduce the potential plot from the paper (and also suffices
 for all the metrics).
 
+In addition to the beta values, you can also configure the number of runs
+used for Karger's algorithm by setting `KARGER_RUNS`, e.g.
+```
+KARGER_RUNS=200 scripts/potentials.sh
+```
+This is only relevant for `potentials.sh`. The default is 100, as a
+tradeoff to keep errors reasonably low but also keep the runtime down.
+
 ## Overview of repository contents
 - `scripts/`: bash scripts to easily prepare the data and run all experiments
 - `data/`: place for the datasets, can be populated automatically with `scripts/prepare_datasets.sh`
