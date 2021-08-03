@@ -2,12 +2,32 @@
 
 ## Requirements
 The easiest way to set up all required packages is to user the Docker image
-we provide. It contains a copy of this repository at `/karger_extensions`
-and has all requirements already installed. You still need to download the
-datasets, so skip to the next section.
+we provide. It contains the code, all the preprocessed datasets and all
+required packages. To quickly get started (you don't even need to clone this repo):
+```
+# docker pull ejenner/karger_extensions
+# docker run --rm -it ejenner/karger_extensions bash
+```
+Then inside the Docker container, run `poetry shell`. At this point,
+you can skip to [How to run experiments](#how-to-run-experiments) below.
 
-If you don't want to use the Docker image (for example for development purposes),
-you will need to install:
+Alternatively, you may want to mount the `src/` and `scripts/` directory
+into the Docker container from your local repository (if you want to
+make changes to the code). And you might want to mount the `results/` directory
+to sync results between the Docker container and your local repo.
+In that case, you could do:
+```
+sudo docker run --rm -it \
+  --mount type=bind,src=$(pwd)/src,target=/karger_extensions/src \
+  --mount type=bind,src=$(pwd)/scripts,target=/karger_extensions/scripts \
+  --mount type=bind,src=$(pwd)/results,target=/karger_extensions/results \
+  ejenner/karger_extensions:dependencies bash
+```
+(the `:dependencies` tag contains the packages and the data but *not* the code).
+Then again skip to [How to run experiments](#how-to-run-experiments).
+
+If you don't want to use the Docker image, you will need to first install
+the required dependencies:
 - Julia with the `StatsBase.jl` and `HDF5` packages
 - Python 3 with packages:
   - `numpy`
@@ -22,6 +42,8 @@ So if you have installed `poetry`, you may run `poetry install` inside this repo
 to create a new virtual environment with exactly the same versions of these packages
 that we tested the code with. Run `poetry shell` afterwards to activate the new
 environment.
+
+Without Docker, you will also need to download the datasets, see the next section.
 
 ## Datasets
 Run `scripts/prepare_datasets.sh` to download and preprocess all datasets. In addition
@@ -54,6 +76,11 @@ In more detail, the pipeline consists of the following steps:
 
 `potentials` requires `create_graphs` to be run first, and the other
 three scripts all requires `potentials` to be run first.
+
+`create_graphs.sh`, `potentials.sh` and `metrics.sh` all take an optional
+argument, which can be either `usps` or `grabcut`. If given, only that dataset
+is processed, otherwise, both datasets are. The plotting scripts only apply
+to Grabcut anyway.
 
 `create_graphs` takes into account a `BETAS` environment variable
 if it exists, which you can use to specify which beta values to

@@ -6,7 +6,7 @@ from sklearn.neighbors import kneighbors_graph
 import scipy
 
 np.random.seed(0)
-os.makedirs("data/graphs/usps", exist_ok=True)
+os.makedirs("results/graphs/usps", exist_ok=True)
 
 n = 7291
 beta = float(sys.argv[1])
@@ -34,14 +34,14 @@ for l in [20, 40, 100, 200]:
         seeds = np.zeros(n, dtype=np.int64)
         seeds[mask] = labels[mask]
 
-        os.makedirs(f"data/graphs/usps/{l}_{i}", exist_ok=True)
+        os.makedirs(f"results/graphs/usps/{l}_{i}", exist_ok=True)
         # Remove the hdf5 file if it exists, to avoid errors from h5py
         try:
-            os.remove(f"data/graphs/usps/{l}_{i}/{beta}.h5")
+            os.remove(f"results/graphs/usps/{l}_{i}/{int(beta)}.h5")
         except OSError:
             pass
 
-        with h5py.File(f"data/graphs/usps/{l}_{i}/{beta}.h5", "w") as f:
+        with h5py.File(f"results/graphs/usps/{l}_{i}/{int(beta)}.h5", "w") as f:
             f.create_dataset("n", data=n)
             f.create_dataset("edges", data=edges)
             f.create_dataset("weights", data=weights)

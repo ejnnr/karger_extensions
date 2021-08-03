@@ -27,6 +27,7 @@ seeds = np.digitize(seeds, np.array([0.01, 0.4]))
 
 n, edges, weights = graph_from_hed(hed, beta=args.beta)
 
+os.makedirs(os.path.dirname(args.o), exist_ok=True)
 # Remove the hdf5 file if it exists, to avoid errors from h5py
 try:
     os.remove(args.o)

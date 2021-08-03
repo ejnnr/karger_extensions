@@ -19,6 +19,6 @@ if [[ ! -z "$1" ]]; then
     exit 0
 fi
 
-for dataset in "usps grabcut"; do
+for dataset in usps grabcut; do
     metric "$dataset"
 done

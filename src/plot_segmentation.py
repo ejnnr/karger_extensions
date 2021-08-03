@@ -1,4 +1,5 @@
 import argparse
+import os
 import h5py
 import matplotlib.pyplot as plt
 import skimage.io
@@ -68,4 +69,5 @@ plt.contour(watershed.reshape(image.shape[0:2]), levels=np.array([1.5]), colors=
 plt.axis("off")
 plt.title("Watershed")
 plt.tight_layout()
+os.makedirs(os.path.dirname(args.o), exist_ok=True)
 plt.savefig(args.o)

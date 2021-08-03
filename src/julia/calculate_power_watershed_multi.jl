@@ -7,7 +7,7 @@ using .Karger
 # The file has to be an HDF5 file with fields n, edges, weights and seeds. The output
 # will be written in a file with the same name in the "power_watershed" directory
 
-graph_path = "data/graphs/" * ARGS[1] * ".h5"
+graph_path = "results/graphs/" * ARGS[1] * ".h5"
 result_path = "results/power_watershed/" * ARGS[1] * ".h5"
 
 n = h5read(graph_path, "n")
@@ -24,7 +24,7 @@ weights .= round.(weights)
 
 seeds = h5read(graph_path, "seeds")
 g = Graph(n, transpose(edges) .+ 1, weights)
-mkpath("results/power_watershed")
+mkpath(dirname(result_path))
 cp(graph_path, result_path, force=true)
 
 pots = power_watershed_multi(g, seeds)

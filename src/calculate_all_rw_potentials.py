@@ -17,6 +17,8 @@ with h5py.File(args.path, "r") as f:
 
 rw_pot = random_walker(n, edges, weights, seeds, mode="bf")
 
+os.makedirs(os.path.dirname(args.o), exist_ok=True)
+
 # Remove the hdf5 file if it exists, to avoid errors from h5py
 try:
     os.remove(args.o)

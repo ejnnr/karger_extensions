@@ -8,14 +8,15 @@ USPS_BETAS="${USPS_BETAS:-$BETAS}"
 
 # First argument must be the image name
 function img_to_graph {
+    echo "Processing $1"
     # these are the beta values required for the potential plots
     betas="${GRABCUT_BETAS:-0 1 2 5 10 20}"
-    mkdir -p "data/graphs/grabcut/$1"
+    mkdir -p "results/graphs/grabcut/$1"
     for beta in $betas; do
         python src/img_to_graph.py "data/images/$1.jpg" \
         --hed "data/hed/$1.jpg" \
         -s "data/seeds/$1.png" \
-        -o "data/graphs/grabcut/$1/$beta.h5" \
+        -o "results/graphs/grabcut/$1/$beta.h5" \
         --beta "$beta"
     done
 }
@@ -30,7 +31,8 @@ function all {
         # these are the beta values used elsewhere
         # (2 and 5 for Karger/RW and 10 for watershed)
         betas="${USPS_BETAS:-2 5 10}"
-        for beta in "$betas"; do
+        for beta in $betas; do
+            echo "Processing USPS with beta=$beta"
             python src/usps_graph.py "$beta"
         done
     else
@@ -45,7 +47,7 @@ if [[ ! -z "$1" ]]; then
     exit 0
 fi
 
-for dataset in "usps grabcut"; do
+for dataset in usps grabcut; do
     all "$dataset"
 done
 

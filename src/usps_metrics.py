@@ -37,7 +37,7 @@ for l in ls:
         path = f"{l}_{i}"
         with h5py.File(f"results/karger_potentials/usps/{path}/{betas['karger']}.h5", "r") as f:
             segmentations["karger"] = f["segmentation"][()]
-        with h5py.File(f"data/graphs/usps/{path}/{betas['watershed']}.h5", "r") as f:
+        with h5py.File(f"results/graphs/usps/{path}/{betas['watershed']}.h5", "r") as f:
             seeds = f["seeds"][()]
             gt = f["ground_truth"][()]
         with h5py.File(f"results/rw_potentials/usps/{path}/{betas['RW']}.h5", "r") as f:

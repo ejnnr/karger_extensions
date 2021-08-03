@@ -68,6 +68,6 @@ gzip -d zip.train.gz
 # go back out of /data directory
 cd ..
 
-convert the USPS data to .h5
+# convert the USPS data to .h5
 python src/read_usps.py
 rm data/zip.train

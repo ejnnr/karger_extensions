@@ -1,4 +1,5 @@
 import argparse
+import os
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
@@ -55,4 +56,6 @@ plt.axis("off")
 cbar_ax = fig.add_axes([0.94, 0.14, 0.02, 0.72])
 fig.colorbar(im, cax=cbar_ax)
 plt.tight_layout(rect=[0, 0, 0.9, 1])
+
+os.makedirs(os.path.dirname(args.o), exist_ok=True)
 plt.savefig(args.o)

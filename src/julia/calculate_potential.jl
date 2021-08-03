@@ -10,7 +10,7 @@ using .Karger
 
 Random.seed!(0)
 
-graph_path = "data/graphs/" * ARGS[1] * ".h5"
+graph_path = "results/graphs/" * ARGS[1] * ".h5"
 result_path = "results/karger_potentials/" * ARGS[1] * ".h5"
 
 n = h5read(graph_path, "n")
@@ -18,6 +18,6 @@ edges = h5read(graph_path, "edges")
 weights = h5read(graph_path, "weights")
 seeds = h5read(graph_path, "seeds")
 g = Graph(n, transpose(edges) .+ 1, weights)
-mkpath("results/karger_potentials")
+mkpath(dirname(result_path))
 cp(graph_path, result_path, force=true)
 h5write(result_path, "potential", potential(g, parse(Int, ARGS[2]), seeds)[1])
