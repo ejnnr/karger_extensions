@@ -17,7 +17,8 @@ make changes to the code). And you might want to mount the `results/` directory
 to sync results between the Docker container and your local repo.
 In that case, you could do:
 ```
-sudo docker run --rm -it \
+# docker pull ejenner/karger_extensions:dependencies
+# docker run --rm -it \
   --mount type=bind,src=$(pwd)/src,target=/karger_extensions/src \
   --mount type=bind,src=$(pwd)/scripts,target=/karger_extensions/scripts \
   --mount type=bind,src=$(pwd)/results,target=/karger_extensions/results \
